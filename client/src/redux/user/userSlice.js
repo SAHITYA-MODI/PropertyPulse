@@ -32,7 +32,7 @@ const userSlice = createSlice({
     },
     updateUserFailure: (state, action) => {
       state.error = action.payload;
-      state.loading = null;
+      state.loading = false;
     },
     deleteUserStart: (state) => {
       state.loading = true;

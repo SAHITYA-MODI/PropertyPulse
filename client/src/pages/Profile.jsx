@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getDownloadURL,
   getStorage,
-  list,
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
@@ -70,7 +69,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      useDispatch(updateUserStart());
+      dispatch(updateUserStart());
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         headers: {
@@ -80,13 +79,13 @@ const Profile = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        useDispatch(updateUserFailure(data.message));
+        dispatch(updateUserFailure(data.message));
         return;
       }
       setUpdateSuccess(true);
-      useDispatch(updateUserSuccess(data));
+      dispatch(updateUserSuccess(data));
     } catch (error) {
-      useDispatch(updateUserFailure(error.message));
+      dispatch(updateUserFailure(error.message));
     }
   };
 
@@ -273,6 +272,7 @@ const Profile = () => {
                 >
                   Delete
                 </button>
+                <Link to={`/update-listing/${listings._id}`}></Link>
                 <button className="text-green-700 uppercase">Edit</button>
               </div>
             </div>;
