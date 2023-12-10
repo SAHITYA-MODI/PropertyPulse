@@ -9,6 +9,7 @@ import {
   FaBath,
   FaBed,
   FaChair,
+  FaMapMarkedAlt,
   FaMapMarkerAlt,
   FaParking,
   FaShare,
@@ -140,7 +141,7 @@ export default function Listing() {
                 onClick={() => setContact(true)}
                 className="bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 p-3"
               >
-                Contact Landlord
+                Contact landlord
               </button>
             )}
             {contact && <Contact listing={listing} />}

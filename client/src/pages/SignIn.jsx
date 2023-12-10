@@ -12,6 +12,7 @@ const SignIn = () => {
   const [fromData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({ ...fromData, [e.target.id]: e.target.value });
   };
@@ -19,7 +20,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      useDispatch(signInStart());
+      dispatch(signInStart());
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -29,13 +30,13 @@ const SignIn = () => {
       });
       const data = res.json();
       if (data.success === false) {
-        useDispatch(signInFailure(data.message));
+        dispatch(signInFailure(data.message));
         return;
       }
-      useDispatch(signInSuccess(data));
+      dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      useDispatch(signInFailure(error.message));
+      dispatch(signInFailure(error.message));
     }
   };
 
